@@ -315,7 +315,11 @@ class TranslatableSubscriber extends AbstractSubscriber
         $em            = $eventArgs->getEntityManager();
         $entity        = $eventArgs->getEntity();
         $classMetadata = $em->getClassMetadata(get_class($entity));
-
+        
+        if (!$this->isTranslatable($classMetadata)) {
+            return;
+        }
+        
         if (!$this->getClassAnalyzer()->hasMethod($classMetadata->reflClass, 'setCurrentLocale')) {
             return;
         }
