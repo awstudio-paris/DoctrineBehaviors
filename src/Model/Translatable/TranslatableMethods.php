@@ -130,7 +130,7 @@ trait TranslatableMethods
     public function mergeNewTranslations()
     {
         foreach ($this->getNewTranslations() as $newTranslation) {
-            if (!$this->getTranslations()->contains($newTranslation)) {
+            if (!$this->getTranslations()->contains($newTranslation) && !$this->getNewTranslations()->isEmpty()) {
                 $this->addTranslation($newTranslation);
                 $this->getNewTranslations()->removeElement($newTranslation);
             }
